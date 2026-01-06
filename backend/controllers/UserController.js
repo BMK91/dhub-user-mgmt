@@ -5,10 +5,10 @@ const User = require("../models/UserModel");
 
 const listUsers = async (req, res) => {
   try {
-    const userRole = req.user?.role;
-    if (!userRole || !["admin", "moderator"].includes(userRole)) {
+    if (!req.user) {
       return res.status(401).json({ error: "Unauthorized access." });
     }
+    const userRole = req.user.role;
 
     const { filter } = req.body;
     console.log({ filter });
